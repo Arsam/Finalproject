@@ -46,16 +46,13 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.itemViewHolder
 
     @Override
     public void onBindViewHolder(itemViewHolder holder, int position) {
-
         holder.bind(position);
-
     }
 
     @Override
     public int getItemCount() {
         return mNumberItems;
     }
-
 
     class itemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -64,8 +61,6 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.itemViewHolder
 
         public itemViewHolder(View itemView) {
             super(itemView);
-
-
             viewHolder = (TextView) itemView.findViewById(R.id.view_holder_instance);
             itemView.setOnClickListener(this);
 

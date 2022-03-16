@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements itemAdapter.ListI
     private static String queryString;
     private TextView mInstruction;
     private Button button;
-    private ProgressBar progressBar;
-    private itemAdapter mAdapter;
-    private RecyclerView mItemList;
+    public static ProgressBar progressBar;
+    public static itemAdapter mAdapter;
+    public static RecyclerView mItemList;
     private static final int numberOfItems = 20;
 
 
@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements itemAdapter.ListI
     public void searchActivities(View view) {
         //Get the queryString and execute GetActivity 20 times
         queryString = activityInput.getText().toString();
-        for(int i = 0;i < 20;i++)
-            new GetActivity().execute(queryString);
 
         InputMethodManager inputManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -68,11 +66,12 @@ public class MainActivity extends AppCompatActivity implements itemAdapter.ListI
 
         if (networkInfo != null && networkInfo.isConnected()) {
             progressBar.setVisibility(View.VISIBLE);
+            for(int i = 0;i < 20;i++)
+                new GetActivity().execute(queryString);
         }
 
         //display the RecyclerView
-        if (activityArray.size() >= 20) {
-            progressBar.setVisibility(View.INVISIBLE);
+
             button.setVisibility(View.INVISIBLE);
             activityInput.setVisibility(View.INVISIBLE);
             mInstruction.setVisibility(View.INVISIBLE);
@@ -80,10 +79,8 @@ public class MainActivity extends AppCompatActivity implements itemAdapter.ListI
             mItemList.setLayoutManager(layoutManager);
             mItemList.setHasFixedSize(true);
             mAdapter = new itemAdapter(numberOfItems, this);
-            mItemList.setAdapter(mAdapter);
-            mItemList.setVisibility(View.VISIBLE);
 
-        }
+
     }
 
     @Override
